@@ -53,6 +53,17 @@ html {
   padding-left: 5px;
   font-size: 1.5em;
 }
+.--btn-arrow{
+  background-color: transparent;
+  color: var(--color-btn);
+  border-radius: 50%;
+  border: none;
+  width: 50px;
+  margin: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  font-size: 1.5em;
+}
 .--btn-options {
   background-color: transparent;
   color: var(--color-btn);
@@ -71,9 +82,9 @@ html {
   color: var(--color-text);
   border: 1px solid var(--color-btn);
 }
-.btn-chat-down-contacts{
-    width: 50px;
-    height: 50px;
+.btn-chat-down-contacts {
+  width: 50px;
+  height: 50px;
 }
 .btn-sign-up {
   font-size: 1em;
@@ -242,19 +253,13 @@ img {
   margin: 10px;
 }
 .messageSend {
-    margin: 10px;
-    text-align: left;
+  margin: 10px;
+  text-align: left;
 }
 .messageReceived {
-    margin: 10px;
-    text-align: right;
+  margin: 10px;
+  text-align: right;
 }
-
-
-
-
-
-
 
 @media screen and (max-width: 375px) {
   .container-login {
