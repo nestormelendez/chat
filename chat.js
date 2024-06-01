@@ -108,6 +108,28 @@ document.addEventListener("click", (e) => {
   if (e.target.matches(".bubble-contact")) {
     let position = e.target.dataset.bubble;
     let receiver = user[position];
+
+    const userStorage = localStorage.getItem(userActive.userName);
+
+    let messages = [];
+    if (userStorage) {
+      messages = JSON.parse(userStorage);
+    }
+    let createChat = "";
+    let chatWithReceiver = [];
+
+    for (let index = 0; index < messages.length; index++) {
+      const element = messages[index];
+      if (element.receiver == receiver.userName) {
+        chatWithReceiver.push(element);
+      }
+    }
+
+    for (let index = 0; index < chatWithReceiver.length; index++) {
+      const element = chatWithReceiver[index];
+      createChat += `\n <div class="messageSend"><blockquote>${element.sender}</blockquote> \n <span>${element.message} <span></div>`;
+    }
+
     let chatContactsContainer = document.getElementById(
       "chat-contacts-container"
     );
@@ -121,7 +143,7 @@ document.addEventListener("click", (e) => {
             class="btn btn-chat-down-contacts --btn-arrow">↕️</button>
         <button data-index="${position}" class="btn --btn-delete">x</button>
     </header>
-    <div id="chat-${position}" class="is-active no-active"></div>
+    <div id="chat-${position}" class="is-active no-active">${createChat}</div>
     <footer data-index="${position}" class="content-header-footer">
         <input data-index="${position}" id="input-chat-contact-${position}" class="input input-chat-contacts"
             type="text" placeholder="Chat con ${receiver.userName}">
@@ -143,7 +165,9 @@ document.addEventListener("click", (e) => {
 
   if (e.target.matches(".--btn-delete")) {
     let element = e.target.dataset.index;
-    let elementRemove = document.getElementById(`chat-content-contact-${element}`) 
+    let elementRemove = document.getElementById(
+      `chat-content-contact-${element}`
+    );
     elementRemove.parentNode.removeChild(elementRemove);
   }
 });
