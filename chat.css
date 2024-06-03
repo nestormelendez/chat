@@ -252,11 +252,11 @@ img {
 .input-login {
   margin: 10px;
 }
-.messageSend {
+.messageReceived {
   margin: 10px;
   text-align: left;
 }
-.messageReceived {
+.messageSend {
   margin: 10px;
   text-align: right;
 }
