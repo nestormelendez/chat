@@ -109,11 +109,8 @@ document.addEventListener("click", (e) => {
   if (e.target.matches(".--btn-chat-send-contacts")) {
     let position = e.target.dataset.index;
     let chatActive = document.getElementById(`chat-${position}`);
-    let chatInput = document.getElementById(
-      `input-chat-contact-${position}`
-    ).value;
+    let chatInput = document.getElementById(`input-chat-contact-${position}`).value;
     let receiver = user[position];
-    chatActive.innerHTML += `\n <div class="messageSend"><blockquote>${userActive.userName}</blockquote> \n <span>${chatInput} <span></div>`;
 
     const userStorage = localStorage.getItem(userActive.userName);
 
@@ -132,6 +129,8 @@ document.addEventListener("click", (e) => {
       receiver: receiver.userName,
       position: position,
     };
+
+
     messages.push(newMessage);
 
     channel.postMessage(JSON.stringify(newMessage));
@@ -139,8 +138,49 @@ document.addEventListener("click", (e) => {
     const menssageSave = JSON.stringify(messages);
     localStorage.setItem(userActive.userName, menssageSave);
 
+    let createChat = "";
+    console.log(messages);
+    for (let index = 0; index < messages.length; index++) {
+      const element = messages[index];
+      if (element.sender == userActive.userName) {
+        createChat += `<br> <div class="messageSend"><blockquote>${element.sender}</blockquote> <br> <span>${element.message} <span></div>`;
+      } else {
+        createChat += `<br> <div class="messageReceived"><blockquote>${element.sender}</blockquote> <br> <span>${element.message} <span></div>`;
+      }
+    }
+
+    let chatContactsContainer = document.getElementById(`chat-${position}`);
+    chatContactsContainer.innerHTML += `${createChat}`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     document.getElementById(`input-chat-contact-${position}`).value = "";
-    chatActive.scrollTop = `9999`;
+    chatActive.scrollTop = `999999`;
   }
 
   if (e.target.matches(".--btn-new-chat")) {
@@ -169,9 +209,7 @@ document.addEventListener("click", (e) => {
       }
     }
 
-    let chatContactsContainer = document.getElementById(
-      "chat-contacts-container"
-    );
+    let chatContactsContainer = document.getElementById("chat-contacts-container");
     chatContactsContainer.innerHTML += `<div id="chat-content-contact-${position}" class="chat-content-active">
     <header data-index="${position}" class="content-header-footer">
         <div class="user-header-contact">
@@ -249,7 +287,7 @@ channel.addEventListener("message", (event) => {
 
     localStorage.setItem(userActive.userName, menssageSave);
     document.getElementById(`input-chat-contact-${lugar}`).value = "";
-    chatActive.scrollTop = `9999`;
+    chatActive.scrollTop = `999999`;
   }
 });
 
