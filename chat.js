@@ -57,8 +57,14 @@ const channel = new BroadcastChannel("chat");
 
 document.addEventListener("click", (e) => {
   if (e.target.matches(".user-out")) {
-    pageLogin.classList.toggle("disguise");
 
+    let newMessage = {
+      noConect: userActive.userName,
+    };
+
+    channel.postMessage(JSON.stringify(newMessage));
+
+    pageLogin.classList.toggle("disguise");
     pageChat.classList.toggle("disguise");
   }
 
@@ -180,6 +186,23 @@ document.addEventListener("click", (e) => {
 
     const userStorage = localStorage.getItem(userActive.userName);
 
+
+
+
+    let notificationContent = document.getElementById(`notification-${position}`);
+    let notification = ``;
+    notificationContent.innerText = notification;
+
+
+
+
+
+
+
+
+
+
+
     let messages = [];
     if (userStorage) {
       messages = JSON.parse(userStorage);
@@ -280,6 +303,23 @@ channel.addEventListener("message", (event) => {
       }
     }
   }
+
+  if (receivedMessage.noConect !== userActive.userName) {
+    for (let index = 0; index < user.length; index++) {
+      const element = user[index];
+      if (element.userName == receivedMessage.noConect) {
+      
+        let userConectado = document.getElementById(`conectado-${element.id - 1}`);
+
+        userConectado.classList.remove("contectado")
+      }
+    }
+  }
+
+
+
+
+
 });
 
 function verifyEmail(user, email) {
