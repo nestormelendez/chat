@@ -261,6 +261,16 @@ img {
   text-align: right;
 }
 
+.contectado {
+   background-color: green;
+   border-radius: 50%;
+   width: 10px;
+   height: 10px;
+}
+
+
+
+
 @media screen and (max-width: 375px) {
   .container-login {
     width: 340px;
@@ -287,3 +297,4 @@ img {
     margin-top: 15px;
   }
 }
+
